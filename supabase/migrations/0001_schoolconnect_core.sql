@@ -206,7 +206,7 @@ create index visit_slots_school_start_idx on public.visit_slots(school_id,starts
 create index visit_bookings_school_slot_status_idx on public.visit_bookings(school_id,slot_id,status);
 create index message_logs_school_created_idx on public.message_logs(school_id,created_at desc);
 
--- RLS is enabled on every table in the exposed public schema.
+-- RLS is enabled on every application table in the exposed public schema.
 alter table public.schools enable row level security;
 alter table public.school_memberships enable row level security;
 alter table public.school_branches enable row level security;
@@ -220,6 +220,21 @@ alter table public.visit_slots enable row level security;
 alter table public.visit_bookings enable row level security;
 alter table public.whatsapp_channels enable row level security;
 alter table public.message_logs enable row level security;
+
+-- Remove any inherited/default Data API grants first. RLS does not replace GRANT/REVOKE.
+revoke all on table public.schools, public.school_memberships,
+  public.school_branches,
+  public.school_classes,
+  public.fee_plans,
+  public.school_content,
+  public.parents,
+  public.students,
+  public.admission_enquiries,
+  public.visit_slots,
+  public.visit_bookings,
+  public.whatsapp_channels,
+  public.message_logs
+from anon, authenticated;
 
 -- Membership rows are readable only by the member themselves. Provision membership
 -- from a trusted administrative workflow; there are intentionally no client INSERT/UPDATE policies.
@@ -236,62 +251,195 @@ on public.schools for update to authenticated
 using (private.is_school_member(id))
 with check (private.is_school_member(id));
 
--- All staff data policies are tenant-scoped. Add role-specific restrictions before
--- production (e.g. viewer read-only, admissions cannot edit billing or staff).
-create policy "school members access branches"
-on public.school_branches for all to authenticated
+-- Separate policies make each operation explicit. All members currently share the same
+-- tenant-scoped CRUD baseline; enforce role-specific restrictions before production.
+
+create policy "school_branches members can select"
+on public.school_branches for select to authenticated
+using (private.is_school_member(school_id));
+
+create policy "school_branches members can insert"
+on public.school_branches for insert to authenticated
+with check (private.is_school_member(school_id));
+
+create policy "school_branches members can update"
+on public.school_branches for update to authenticated
 using (private.is_school_member(school_id))
 with check (private.is_school_member(school_id));
 
-create policy "school members access classes"
-on public.school_classes for all to authenticated
+create policy "school_branches members can delete"
+on public.school_branches for delete to authenticated
+using (private.is_school_member(school_id));
+
+create policy "school_classes members can select"
+on public.school_classes for select to authenticated
+using (private.is_school_member(school_id));
+
+create policy "school_classes members can insert"
+on public.school_classes for insert to authenticated
+with check (private.is_school_member(school_id));
+
+create policy "school_classes members can update"
+on public.school_classes for update to authenticated
 using (private.is_school_member(school_id))
 with check (private.is_school_member(school_id));
 
-create policy "school members access fee plans"
-on public.fee_plans for all to authenticated
+create policy "school_classes members can delete"
+on public.school_classes for delete to authenticated
+using (private.is_school_member(school_id));
+
+create policy "fee_plans members can select"
+on public.fee_plans for select to authenticated
+using (private.is_school_member(school_id));
+
+create policy "fee_plans members can insert"
+on public.fee_plans for insert to authenticated
+with check (private.is_school_member(school_id));
+
+create policy "fee_plans members can update"
+on public.fee_plans for update to authenticated
 using (private.is_school_member(school_id))
 with check (private.is_school_member(school_id));
 
-create policy "school members access content"
-on public.school_content for all to authenticated
+create policy "fee_plans members can delete"
+on public.fee_plans for delete to authenticated
+using (private.is_school_member(school_id));
+
+create policy "school_content members can select"
+on public.school_content for select to authenticated
+using (private.is_school_member(school_id));
+
+create policy "school_content members can insert"
+on public.school_content for insert to authenticated
+with check (private.is_school_member(school_id));
+
+create policy "school_content members can update"
+on public.school_content for update to authenticated
 using (private.is_school_member(school_id))
 with check (private.is_school_member(school_id));
 
-create policy "school members access parents"
-on public.parents for all to authenticated
+create policy "school_content members can delete"
+on public.school_content for delete to authenticated
+using (private.is_school_member(school_id));
+
+create policy "parents members can select"
+on public.parents for select to authenticated
+using (private.is_school_member(school_id));
+
+create policy "parents members can insert"
+on public.parents for insert to authenticated
+with check (private.is_school_member(school_id));
+
+create policy "parents members can update"
+on public.parents for update to authenticated
 using (private.is_school_member(school_id))
 with check (private.is_school_member(school_id));
 
-create policy "school members access students"
-on public.students for all to authenticated
+create policy "parents members can delete"
+on public.parents for delete to authenticated
+using (private.is_school_member(school_id));
+
+create policy "students members can select"
+on public.students for select to authenticated
+using (private.is_school_member(school_id));
+
+create policy "students members can insert"
+on public.students for insert to authenticated
+with check (private.is_school_member(school_id));
+
+create policy "students members can update"
+on public.students for update to authenticated
 using (private.is_school_member(school_id))
 with check (private.is_school_member(school_id));
 
-create policy "school members access enquiries"
-on public.admission_enquiries for all to authenticated
+create policy "students members can delete"
+on public.students for delete to authenticated
+using (private.is_school_member(school_id));
+
+create policy "admission_enquiries members can select"
+on public.admission_enquiries for select to authenticated
+using (private.is_school_member(school_id));
+
+create policy "admission_enquiries members can insert"
+on public.admission_enquiries for insert to authenticated
+with check (private.is_school_member(school_id));
+
+create policy "admission_enquiries members can update"
+on public.admission_enquiries for update to authenticated
 using (private.is_school_member(school_id))
 with check (private.is_school_member(school_id));
 
-create policy "school members access visit slots"
-on public.visit_slots for all to authenticated
+create policy "admission_enquiries members can delete"
+on public.admission_enquiries for delete to authenticated
+using (private.is_school_member(school_id));
+
+create policy "visit_slots members can select"
+on public.visit_slots for select to authenticated
+using (private.is_school_member(school_id));
+
+create policy "visit_slots members can insert"
+on public.visit_slots for insert to authenticated
+with check (private.is_school_member(school_id));
+
+create policy "visit_slots members can update"
+on public.visit_slots for update to authenticated
 using (private.is_school_member(school_id))
 with check (private.is_school_member(school_id));
 
-create policy "school members access visit bookings"
-on public.visit_bookings for all to authenticated
+create policy "visit_slots members can delete"
+on public.visit_slots for delete to authenticated
+using (private.is_school_member(school_id));
+
+create policy "visit_bookings members can select"
+on public.visit_bookings for select to authenticated
+using (private.is_school_member(school_id));
+
+create policy "visit_bookings members can insert"
+on public.visit_bookings for insert to authenticated
+with check (private.is_school_member(school_id));
+
+create policy "visit_bookings members can update"
+on public.visit_bookings for update to authenticated
 using (private.is_school_member(school_id))
 with check (private.is_school_member(school_id));
 
-create policy "school members access WhatsApp channels"
-on public.whatsapp_channels for all to authenticated
+create policy "visit_bookings members can delete"
+on public.visit_bookings for delete to authenticated
+using (private.is_school_member(school_id));
+
+create policy "whatsapp_channels members can select"
+on public.whatsapp_channels for select to authenticated
+using (private.is_school_member(school_id));
+
+create policy "whatsapp_channels members can insert"
+on public.whatsapp_channels for insert to authenticated
+with check (private.is_school_member(school_id));
+
+create policy "whatsapp_channels members can update"
+on public.whatsapp_channels for update to authenticated
 using (private.is_school_member(school_id))
 with check (private.is_school_member(school_id));
 
-create policy "school members access message logs"
-on public.message_logs for all to authenticated
+create policy "whatsapp_channels members can delete"
+on public.whatsapp_channels for delete to authenticated
+using (private.is_school_member(school_id));
+
+create policy "message_logs members can select"
+on public.message_logs for select to authenticated
+using (private.is_school_member(school_id));
+
+create policy "message_logs members can insert"
+on public.message_logs for insert to authenticated
+with check (private.is_school_member(school_id));
+
+create policy "message_logs members can update"
+on public.message_logs for update to authenticated
 using (private.is_school_member(school_id))
 with check (private.is_school_member(school_id));
+
+create policy "message_logs members can delete"
+on public.message_logs for delete to authenticated
+using (private.is_school_member(school_id));
 
 -- Explicit table grants are still required in addition to RLS. No anon access is granted.
 grant select, update on public.schools to authenticated;
