@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SchoolConnect — School workspace</title>
+<style>
+:root{--navy:#172554;--blue:#3157c8;--ink:#172033;--muted:#64748b;--line:#e5eaf2;--bg:#f5f7fb;--white:#fff;--green:#16845b;--amber:#a76512;--red:#b42318}
+*{box-sizing:border-box}body{margin:0;font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:var(--bg)}button,input,select{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.side{background:#101d40;color:#dbe5ff;padding:22px 16px}.brand{font-size:20px;font-weight:800;color:white;letter-spacing:-.5px;padding:5px 10px 22px}.brand span{color:#9eb5ff}.school{padding:12px;border:1px solid #33436a;border-radius:12px;margin-bottom:22px;font-size:12px;color:#b9c7e8}.school b{display:block;color:#fff;font-size:13px;margin-bottom:3px}.nav-label{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:#91a2ca;padding:8px 10px}.nav{display:flex;align-items:center;gap:10px;padding:10px;border-radius:9px;color:#c9d4f0;text-decoration:none;margin:3px 0}.nav:hover,.nav.active{background:#263b70;color:white}.nav .ico{width:20px;text-align:center}.main{min-width:0}.top{height:70px;background:white;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 30px}.top small{color:var(--muted)}.avatar{width:34px;height:34px;border-radius:50%;background:#e8edff;color:#2744a2;display:grid;place-items:center;font-weight:700}.content{padding:28px 30px;max-width:1500px;margin:auto}.eyebrow{color:var(--blue);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px}.heading{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:22px}.heading h1{font-size:25px;letter-spacing:-.7px;margin:4px 0}.sub{color:var(--muted);margin:0}.actions{display:flex;gap:9px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:white;border-radius:9px;padding:9px 13px;color:var(--ink);font-weight:650}.btn.primary{background:var(--blue);border-color:var(--blue);color:white}.btn:disabled{opacity:.45;cursor:not-allowed}.notice{padding:12px 15px;border-radius:10px;background:#fff8e8;border:1px solid #f4dfb0;color:#785019;margin-bottom:20px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:white;border:1px solid var(--line);border-radius:13px;padding:17px;min-width:0}.metric{font-size:28px;font-weight:800;letter-spacing:-1px;margin:7px 0 1px}.muted{color:var(--muted)}.metric-label{font-size:12px;color:var(--muted)}.panel{background:white;border:1px solid var(--line);border-radius:13px;margin-top:17px;overflow:hidden}.panel-head{padding:16px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);gap:10px}.panel-head h2{font-size:15px;margin:0}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:650px}th,td{text-align:left;padding:12px 16px;border-bottom:1px solid #eef1f6;font-size:13px}th{color:var(--muted);font-weight:650;background:#fbfcfe}tr:last-child td{border-bottom:0}.pill{display:inline-block;padding:4px 8px;border-radius:20px;background:#eef2ff;color:#334da2;font-size:11px;font-weight:700}.pill.green{background:#e8f7ef;color:#13734e}.pill.orange{background:#fff4e5;color:#94600e}.pill.gray{background:#f1f3f6;color:#64748b}.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.field{padding:9px 11px;border:1px solid var(--line);border-radius:8px;background:white;min-width:180px}.two{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}.empty{padding:28px;text-align:center;color:var(--muted)}.section{display:none}.section.active{display:block}.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.tile{border:1px solid var(--line);border-radius:11px;padding:14px}.tile h3{margin:0 0 4px;font-size:14px}.tile p{margin:0;color:var(--muted);font-size:12px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.form-row label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.form-row input,.form-row select{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px}.modal{position:fixed;inset:0;background:#0b153866;display:none;align-items:center;justify-content:center;padding:20px;z-index:5}.modal.open{display:flex}.dialog{background:white;border-radius:14px;padding:22px;width:min(500px,100%);box-shadow:0 20px 70px #14213d33}.dialog h2{margin:0 0 4px}.dialog .actions{justify-content:flex-end;margin-top:18px}.mobile-menu{display:none}
+@media(max-width:900px){.app{grid-template-columns:1fr}.side{display:none}.side.open{display:block;position:fixed;z-index:4;inset:0 auto 0 0;width:260px}.mobile-menu{display:inline-flex}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.two{grid-template-columns:1fr}.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.top{padding:0 16px}.content{padding:22px 16px}}
+@media(max-width:520px){.heading{display:block}.heading .actions{margin-top:14px}.grid{gap:9px}.card{padding:13px}.metric{font-size:24px}.tiles{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.content{padding:18px 12px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side" id="sidebar">
+<div class="brand">School<span>Connect</span></div>
+<div class="school"><b>Demo School Workspace</b>First pilot · Dhrangadhra<br><span style="color:#91a2ca">School details not configured</span></div>
+<div class="nav-label">Workspace</div>
+<a class="nav active" href="#" data-page="overview"><span class="ico">▦</span>Overview</a>
+<a class="nav" href="#" data-page="enquiries"><span class="ico">✉</span>Admission enquiries</a>
+<a class="nav" href="#" data-page="visits"><span class="ico">◷</span>Visit bookings</a>
+<a class="nav" href="#" data-page="people"><span class="ico">♙</span>Parents & students</a>
+<div class="nav-label">School setup</div>
+<a class="nav" href="#" data-page="classes"><span class="ico">▤</span>Classes & fees</a>
+<a class="nav" href="#" data-page="content"><span class="ico">◇</span>Facilities & FAQs</a>
+<div class="nav-label">Communication</div>
+<a class="nav" href="#" data-page="whatsapp"><span class="ico">☏</span>WhatsApp inbox</a>
+<a class="nav" href="#" data-page="reports"><span class="ico">▥</span>Reports</a>
+<a class="nav" href="#" data-page="settings"><span class="ico">⚙</span>Settings</a>
+</aside>
+<main class="main">
+<header class="top"><div style="display:flex;align-items:center;gap:12px"><button class="btn mobile-menu" id="menuBtn">☰</button><div><b id="topTitle">Overview</b><br><small>School management workspace</small></div></div><div style="display:flex;align-items:center;gap:12px"><span class="pill orange">DEMO MODE</span><div class="avatar">A</div></div></header>
+<div class="content">
+<section class="section active" id="overview">
+<div class="heading"><div><div class="eyebrow">Your school at a glance</div><h1>Good morning 👋</h1><p class="sub">Here is what is happening in your workspace today.</p></div><div class="actions"><button class="btn" data-go="visits">View visits</button><button class="btn primary" id="addEnquiryTop">＋ Add enquiry</button></div></div>
+<div class="notice"><b>Demo workspace:</b> Sample records only. Connect a secured backend before storing real parent or student information. Fees, facilities and WhatsApp are not configured.</div>
+<div class="grid">
+<div class="card"><div class="metric" id="metricEnquiries">12</div><div class="metric-label">Total enquiries · demo</div></div>
+<div class="card"><div class="metric">4</div><div class="metric-label">Visits scheduled · demo</div></div>
+<div class="card"><div class="metric">3</div><div class="metric-label">Follow-ups due · demo</div></div>
+<div class="card"><div class="metric">0</div><div class="metric-label">Live WhatsApp connections</div></div>
+</div>
+<div class="two">
+<div class="panel"><div class="panel-head"><h2>Recent admission enquiries</h2><button class="btn" data-go="enquiries">View all</button></div><div class="table-wrap"><table><thead><tr><th>Parent</th><th>Class</th><th>Received</th><th>Status</th></tr></thead><tbody id="recentRows"></tbody></table></div></div>
+<div class="panel"><div class="panel-head"><h2>Setup checklist</h2><span class="pill orange">In progress</span></div><div style="padding:16px;display:grid;gap:13px"><div>✓ Workspace prototype created</div><div>○ Confirm official class list and fees</div><div>○ Add approved facilities and FAQs</div><div>○ Configure visit hours and capacity</div><div>○ Connect WhatsApp Cloud API</div><div>○ Configure staff access and permissions</div></div></div>
+</div>
+</section>
+<section class="section" id="enquiries">
+<div class="heading"><div><div class="eyebrow">Admissions</div><h1>Admission enquiries</h1><p class="sub">Track parent interest from first message to admission.</p></div><button class="btn primary" id="addEnquiry">＋ Add enquiry</button></div>
+<div class="toolbar"><input class="field" id="searchEnquiry" placeholder="Search parent or phone"><select class="field" id="filterStatus"><option value="">All statuses</option><option>New</option><option>Contacted</option><option>Visit booked</option><option>Admitted</option></select></div>
+<div class="panel"><div class="table-wrap"><table><thead><tr><th>Parent</th><th>Phone</th><th>Class</th><th>Source</th><th>Created</th><th>Status</th></tr></thead><tbody id="enquiryRows"></tbody></table></div></div>
+</section>
+<section class="section" id="visits">
+<div class="heading"><div><div class="eyebrow">Admissions</div><h1>School visit bookings</h1><p class="sub">Plan visits after the school configures real available slots.</p></div></div>
+<div class="notice">Visit booking is a visual prototype only. No slots are bookable yet. Production booking must verify capacity atomically in the database to prevent overbooking.</div>
+<div class="grid"><div class="card"><div class="metric">Not set</div><div class="metric-label">School visiting hours</div></div><div class="card"><div class="metric">Not set</div><div class="metric-label">Maximum visitors per slot</div></div><div class="card"><div class="metric">0</div><div class="metric-label">Live confirmed bookings</div></div><div class="card"><div class="metric">Off</div><div class="metric-label">Automatic booking</div></div></div>
+<div class="panel"><div class="panel-head"><h2>Example parent journey</h2><span class="pill gray">Illustrative only</span></div><div style="padding:18px" class="tiles"><div class="tile"><h3>1 · Choose interest</h3><p>Parent selects “School facilities”.</p></div><div class="tile"><h3>2 · Choose class</h3><p>Parent selects a school-approved class.</p></div><div class="tile"><h3>3 · Pick a time</h3><p>Only available slots should be offered.</p></div></div></div>
+</section>
+<section class="section" id="people">
+<div class="heading"><div><div class="eyebrow">Directory</div><h1>Parents & students</h1><p class="sub">A secure directory for authorised school staff.</p></div></div>
+<div class="notice">No real parent or student records are loaded. Add authentication, staff roles, consent, and tenant isolation before enabling this module.</div>
+<div class="panel"><div class="empty">Parent and student directory will appear here after secure backend setup.</div></div>
+</section>
+<section class="section" id="classes">
+<div class="heading"><div><div class="eyebrow">School setup</div><h1>Classes & fees</h1><p class="sub">Configure the school's approved classes and fee plans.</p></div></div>
+<div class="notice">Official class list and fee schedule have not been supplied. Do not share estimated fees with parents.</div>
+<div class="tiles"><div class="tile"><h3>Class list</h3><p>Not configured · Add verified class names and age criteria.</p></div><div class="tile"><h3>Admission fee</h3><p>Not configured · Enter school-approved amount.</p></div><div class="tile"><h3>Tuition & annual charges</h3><p>Not configured · Define frequency and applicable charges.</p></div></div>
+</section>
+<section class="section" id="content">
+<div class="heading"><div><div class="eyebrow">Parent information</div><h1>Facilities & FAQs</h1><p class="sub">Publish only information verified by the school.</p></div></div>
+<div class="notice">Facilities, transport, timings, age criteria, documents and admission policies are placeholders until confirmed by school management.</div>
+<div class="panel"><div class="empty">No public-facing school content has been approved yet.</div></div>
+</section>
+<section class="section" id="whatsapp">
+<div class="heading"><div><div class="eyebrow">Communication</div><h1>WhatsApp inbox</h1><p class="sub">Manage multilingual parent conversations.</p></div><span class="pill orange">Not connected</span></div>
+<div class="notice">WhatsApp Cloud API is not connected. This screen does not send messages. Before launch, configure Meta business verification, a phone number, webhook validation, approved templates, and explicit opt-in.</div>
+<div class="tiles"><div class="tile"><h3>Gujarati</h3><p>Language option planned.</p></div><div class="tile"><h3>Hindi</h3><p>Language option planned.</p></div><div class="tile"><h3>English</h3><p>Language option planned.</p></div></div>
+<div class="panel"><div class="empty">No live conversations. Connect a verified WhatsApp Business Platform number to enable messaging.</div></div>
+</section>
+<section class="section" id="reports">
+<div class="heading"><div><div class="eyebrow">Insights</div><h1>Reports</h1><p class="sub">Admission funnel and visit conversion analytics.</p></div></div>
+<div class="panel"><div class="empty">Reports will populate when verified school data is connected. Demo metrics are not operational figures.</div></div>
+</section>
+<section class="section" id="settings">
+<div class="heading"><div><div class="eyebrow">Workspace</div><h1>School settings</h1><p class="sub">Configure each school independently in the multi-tenant version.</p></div></div>
+<div class="tiles"><div class="tile"><h3>School profile</h3><p>Name, address, contact details and branding — pending verification.</p></div><div class="tile"><h3>Staff & roles</h3><p>Owner, administrator, admissions staff and read-only roles.</p></div><div class="tile"><h3>Visit rules</h3><p>Working days, slot duration, capacity and blackout dates.</p></div><div class="tile"><h3>Languages</h3><p>Gujarati, Hindi and English content management.</p></div><div class="tile"><h3>Privacy & consent</h3><p>Parent notice, WhatsApp opt-in, retention and deletion settings.</p></div><div class="tile"><h3>Integrations</h3><p>Supabase and WhatsApp connection status.</p></div></div>
+</section>
+</div>
+</main>
+</div>
+<div class="modal" id="enquiryModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+<div class="dialog"><h2 id="modalTitle">Add admission enquiry</h2><p class="muted">Demo only. Do not enter real personal information.</p>
+<form id="enquiryForm">
+<div class="form-row"><div><label for="parentName">Parent name</label><input id="parentName" required maxlength="80" placeholder="Demo parent"></div><div><label for="phone">Phone (demo)</label><input id="phone" maxlength="20" placeholder="0000000000"></div></div>
+<div class="form-row"><div><label for="className">Interested class</label><input id="className" maxlength="50" placeholder="To be confirmed"></div><div><label for="source">Enquiry source</label><select id="source"><option>Walk-in</option><option>WhatsApp</option><option>Phone</option><option>Website</option><option>Referral</option></select></div></div>
+<div class="actions"><button type="button" class="btn" id="cancelModal">Cancel</button><button class="btn primary" type="submit">Save demo enquiry</button></div>
+</form></div>
+</div>
+<script>
+const demoSeed=[
+ {name:"Demo Parent A",phone:"0000000001",klass:"Nursery (sample)",source:"WhatsApp",date:"Today",status:"New"},
+ {name:"Demo Parent B",phone:"0000000002",klass:"To confirm",source:"Walk-in",date:"Yesterday",status:"Contacted"},
+ {name:"Demo Parent C",phone:"0000000003",klass:"To confirm",source:"Phone",date:"Yesterday",status:"Visit booked"},
+ {name:"Demo Parent D",phone:"0000000004",klass:"To confirm",source:"Website",date:"This week",status:"New"}
+];
+let enquiries=JSON.parse(localStorage.getItem("schoolconnect-demo-enquiries")||"null")||demoSeed;
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const statusClass=s=>s==="Admitted"?"green":s==="New"?"orange":"gray";
+function renderRows(){
+ const query=(document.getElementById("searchEnquiry")?.value||"").toLowerCase();
+ const status=document.getElementById("filterStatus")?.value||"";
+ const filtered=enquiries.filter(e=>(e.name+" "+e.phone).toLowerCase().includes(query)&&(!status||e.status===status));
+ document.getElementById("enquiryRows").innerHTML=filtered.map(e=>"<tr><td><b>"+esc(e.name)+"</b></td><td>"+esc(e.phone)+"</td><td>"+esc(e.klass)+"</td><td>"+esc(e.source)+"</td><td>"+esc(e.date)+"</td><td><span class='pill "+statusClass(e.status)+"'>"+esc(e.status)+"</span></td></tr>").join("")||"<tr><td colspan='6' class='empty'>No matching enquiries.</td></tr>";
+ document.getElementById("recentRows").innerHTML=enquiries.slice(-4).reverse().map(e=>"<tr><td><b>"+esc(e.name)+"</b></td><td>"+esc(e.klass)+"</td><td>"+esc(e.date)+"</td><td><span class='pill "+statusClass(e.status)+"'>"+esc(e.status)+"</span></td></tr>").join("");
+ document.getElementById("metricEnquiries").textContent=enquiries.length;
+}
+function go(page){document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active",s.id===page));document.querySelectorAll(".nav").forEach(a=>a.classList.toggle("active",a.dataset.page===page));const active=document.querySelector('[data-page="'+page+'"]');document.getElementById("topTitle").textContent=active?active.textContent.trim():page;document.getElementById("sidebar").classList.remove("open");}
+document.querySelectorAll(".nav").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();go(a.dataset.page)}));
+document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.go)));
+document.getElementById("menuBtn").addEventListener("click",()=>document.getElementById("sidebar").classList.toggle("open"));
+const modal=document.getElementById("enquiryModal");
+function openModal(){modal.classList.add("open");document.getElementById("parentName").focus()}
+document.getElementById("addEnquiry").addEventListener("click",openModal);
+document.getElementById("addEnquiryTop").addEventListener("click",openModal);
+document.getElementById("cancelModal").addEventListener("click",()=>modal.classList.remove("open"));
+modal.addEventListener("click",e=>{if(e.target===modal)modal.classList.remove("open")});
+document.getElementById("enquiryForm").addEventListener("submit",e=>{e.preventDefault();enquiries.push({name:document.getElementById("parentName").value.trim(),phone:document.getElementById("phone").value.trim()||"Not provided",klass:document.getElementById("className").value.trim()||"To confirm",source:document.getElementById("source").value,date:"Just now",status:"New"});localStorage.setItem("schoolconnect-demo-enquiries",JSON.stringify(enquiries));e.target.reset();modal.classList.remove("open");renderRows();go("enquiries")});
+document.getElementById("searchEnquiry").addEventListener("input",renderRows);
+document.getElementById("filterStatus").addEventListener("change",renderRows);
+renderRows();
+</script>
+</body>
+</html>
