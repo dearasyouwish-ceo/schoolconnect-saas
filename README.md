@@ -6,7 +6,7 @@ A reusable school-management workspace with admissions tracking and a WhatsApp-a
 
 **Prototype stage.** The dashboard uses local demo data only. It is not connected to a live school database, WhatsApp number, or production booking service.
 
-The first pilot configuration is intended for Little Blue and Yellow Learning Center, Dhrangadhra, Gujarat. School facts must be confirmed by the school before publication. Fees, classes, facilities, timings, address, and policies are deliberately left as unconfigured placeholders.
+The first pilot workspace is intended for Little Blue and Yellow Learning Center, Dhrangadhra, Gujarat. School facts must be confirmed by the school before publication. The Nursery tuition sample of ₹7,800 per quarter is stored as an unverified draft only; it must not be shown to parents. Other fees, classes, facilities, timings, address, and policies remain unconfigured. See [the school configuration and verified-content register](docs/school-configuration.md) for statuses, bot fallback rules, and launch gates.
 
 ## Modules
 
